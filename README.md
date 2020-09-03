@@ -1,36 +1,38 @@
 # MongoDB Cheat Sheet
 
-## Show All Databases
+## Create DB
+
+### Show All Databases
 
 ```
 show dbs
 ```
 
-## Show Current Database
+### Show Current Database
 
 ```
 db
 ```
 
-## Create Or Switch Database
+### Create Or Switch Database
 
 ```
 use Météo
 ```
 
-## Drop
+### Drop
 
 ```
 db.dropDatabase()
 ```
 
-## Create Collection
+### Create Collection
 
 ```
 db.createCollection('météo')
 ```
 
-## Show Collections
+### Show Collections
 
 ```
 show collections
@@ -38,7 +40,7 @@ show collections
 
 ## CREATE
 
-## Insert Row
+### Insert Row
 
 ```
 db.météo.insert({
@@ -48,7 +50,7 @@ db.météo.insert({
 })
 ```
 
-## Insert Multiple Rows
+### Insert Multiple Rows
 
 ```
 db.météo.insertMany([
@@ -82,58 +84,58 @@ db.météo.insertMany([
 
 ## READ
 
-## Get All Rows
+### Get All Rows
 
 ```
 db.météo.find()
 ```
 
-## Get All Rows Formatted
+### Get All Rows Formatted
 
 ```
 db.météo.find().pretty()
 ```
 
-## Find Rows
+### Find Rows
 
 ```
 db.météo.find({ haut: { $eq: 26  } }).pretty()
 ```
 
-## Sort Rows
+### Sort Rows
 
-#### ASC
+###### ASC
 
 ```
 db.météo.find().sort({ ville: 1 }).pretty()
 ```
 
-#### DESC
+###### DESC
 
 ```
 db.météo.find().sort({ ville: -1 }).pretty()
 ```
 
-## Count Rows
+### Count Rows
 
 ```
 db.météo.find().count()
 db.météo.find({ bas: { $lte: 14 } }).count()
 ```
 
-## Limit Rows
+### Limit Rows
 
 ```
 db.météo.find().limit(2).pretty()
 ```
 
-## Chaining
+### Chaining
 
 ```
 db.météo.find().limit(2).sort({ ville: -1 }).pretty()
 ```
 
-## Foreach
+### Foreach
 
 ```
 db.météo.find().forEach(function(doc) {
@@ -143,7 +145,7 @@ db.météo.find().forEach(function(doc) {
 
 ## UPDATE
 
-## Update Row
+### Update Row
 
 ```
 db.météo.update({ ville: 'Charleroi' },
@@ -154,7 +156,7 @@ db.météo.update({ ville: 'Charleroi' },
 })
 ```
 
-## Update Specific Field
+### Update Specific Field
 
 ```
 db.météo.update({ ville: 'Bruxelles' },
@@ -166,7 +168,7 @@ db.météo.update({ ville: 'Bruxelles' },
 })
 ```
 
-## Increment Field (\$inc)
+### Increment Field (\$inc)
 
 ```
 db.météo.update({ ville: 'Namur' },
@@ -177,21 +179,23 @@ db.météo.update({ ville: 'Namur' },
 })
 ```
 
-##DELETE
+## DELETE
 
-## Delete Row
+### Delete Row
 
 ```
 db.météo.remove({ ville: 'Namur' })
 ```
 
-## Add Index
+## TEXT
+
+### Add Index
 
 ```
 db.météo.createIndex({ ville: 'text' })
 ```
 
-## Text Search
+### Text Search
 
 ```
 db.météo.find({
