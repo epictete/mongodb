@@ -1,8 +1,5 @@
 # Install MongoDB
 
-These steps describe how to install MongoDB on **Ubuntu 20.04 (Focal)**.
-For othe operationg systems, please refer to the [official documentation](https://docs.mongodb.com/manual/administration/install-community/).
-
 ### Install _gnupg_ and its required libraries using the following command:
 
 ```
