@@ -1,4 +1,9 @@
-# MongoDB Cheat Sheet
+# MongoDB CRUD Operations
+
+1. [CREATE](#create)
+1. [READ](#read)
+1. [UPDATE](#update)
+1. [DELETE](#delete)
 
 ## Manage DB and collection
 
