@@ -22,7 +22,7 @@ db
 ### Create Or Switch Database
 
 ```
-use Météo
+use test
 ```
 
 ### Drop
@@ -48,11 +48,14 @@ show collections
 ### Insert Row
 
 ```
-db.météo.insert({
-  ville: "Bruxelles",
-  haut: 27,
-  bas: 13
-})
+db.météo.insert(
+  {
+    _id: 1,
+    ville: "Bruxelles",
+    haut: 27,
+    bas: 13
+  }
+)
 ```
 
 ### Insert Multiple Rows
@@ -60,31 +63,36 @@ db.météo.insert({
 ```
 db.météo.insertMany([
   {
+    _id: 1,
     ville: "Bruxelles",
     haut: 27,
     bas: 13
   },
   {
+    _id: 2,
     ville: "Liège",
     haut: 25,
     bas: 15
   },
   {
+    _id: 3,
     ville: "Namur",
     haut: 26,
     bas: 15
   },
   {
+    _id: 4,
     ville: "Charleroi",
     haut: 25,
     bas: 12
   },
   {
+    _id: 5,
     ville: "Bruges",
     haut: 28,
     bas: 16
   },
-]);
+])
 ```
 
 ## READ
@@ -104,7 +112,9 @@ db.météo.find().pretty()
 ### Find Rows
 
 ```
-db.météo.find({ haut: { $eq: 26  } }).pretty()
+db.météo.find(
+  { haut: { $eq: 26  } }
+)
 ```
 
 ### Sort Rows
@@ -112,13 +122,17 @@ db.météo.find({ haut: { $eq: 26  } }).pretty()
 ##### ASC
 
 ```
-db.météo.find().sort({ ville: 1 }).pretty()
+db.météo.find().sort(
+  { ville: 1 }
+)
 ```
 
 ##### DESC
 
 ```
-db.météo.find().sort({ ville: -1 }).pretty()
+db.météo.find().sort(
+  { ville: -1 }
+)
 ```
 
 ### Count Rows
@@ -128,25 +142,29 @@ db.météo.find().count()
 ```
 
 ```
-db.météo.find({ bas: { $lte: 14 } }).count()
+db.météo.find(
+  { bas: { $lte: 14 } }
+).count()
 ```
 
 ### Limit Rows
 
 ```
-db.météo.find().limit(2).pretty()
+db.météo.find().limit(2)
 ```
 
 ### Chaining
 
 ```
-db.météo.find().limit(2).sort({ ville: -1 }).pretty()
+db.météo.find().limit(2).sort(
+  { ville: -1 }
+)
 ```
 
 ### Foreach
 
 ```
-db.météo.find().forEach(function(doc) {
+db.météo.find().forEach(function(doc){
   print("Ville : " + doc.ville)
 })
 ```
@@ -156,35 +174,37 @@ db.météo.find().forEach(function(doc) {
 ### Update Row
 
 ```
-db.météo.update({ ville: 'Charleroi' },
-{
-  ville: 'Charleroi',
-  haut: 27,
-  bas: 14
-})
+db.météo.update(
+  { ville: 'Charleroi' },
+  {
+    ville: 'Charleroi',
+    haut: 27,
+    bas: 14
+  }
+)
 ```
 
 ### Update Specific Field
 
 ```
-db.météo.update({ ville: 'Bruxelles' },
-{
-  $set: {
-    haut: 25,
-    bas: 11
+db.météo.update(
+  { ville: 'Bruxelles' },
+  {
+    $set: {
+      haut: 25,
+      bas: 11
+    }
   }
-})
+)
 ```
 
 ### Increment Field (\$inc)
 
 ```
-db.météo.update({ ville: 'Namur' },
-{
-  $inc: {
-    bas: 3
-  }
-})
+db.météo.update(
+  { ville: 'Namur' },
+  { $inc: { bas: 3 } }
+)
 ```
 
 ## DELETE
@@ -192,23 +212,39 @@ db.météo.update({ ville: 'Namur' },
 ### Delete Row
 
 ```
-db.météo.remove({ ville: 'Namur' })
+db.météo.remove(
+  { ville: 'Namur' }
+)
 ```
 
-## TEXT
+## Text Search
+
+### Create New Collection
+
+```
+db.stores.insertMany(
+   [
+     { _id: 1, name: "Java Hut", description: "Coffee and cakes" },
+     { _id: 2, name: "Burger Buns", description: "Gourmet hamburgers" },
+     { _id: 3, name: "Coffee Shop", description: "Just coffee" },
+     { _id: 4, name: "Clothes Clothes Clothes", description: "Discount clothing" },
+     { _id: 5, name: "Java Shopping", description: "Indonesian goods" }
+   ]
+)
+```
 
 ### Add Index
 
 ```
-db.météo.createIndex({ ville: 'text' })
+db.stores.createIndex(
+  { name: "text", description: "text" }
+)
 ```
 
 ### Text Search
 
 ```
-db.météo.find({
-  $text: {
-    $search: "Bru"
-    }
-})
+db.stores.find(
+  { $text: {$search: "Coffee" } }
+)
 ```
