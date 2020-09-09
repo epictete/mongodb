@@ -43,6 +43,12 @@ db.createCollection('météo')
 show collections
 ```
 
+### Remove Collection
+
+```
+db.météo.drop()
+```
+
 ## CREATE
 
 ### Insert Row
@@ -50,7 +56,6 @@ show collections
 ```
 db.météo.insert(
   {
-    _id: 1,
     ville: "Bruxelles",
     haut: 27,
     bas: 13
@@ -63,31 +68,21 @@ db.météo.insert(
 ```
 db.météo.insertMany([
   {
-    _id: 1,
-    ville: "Bruxelles",
-    haut: 27,
-    bas: 13
-  },
-  {
-    _id: 2,
     ville: "Liège",
     haut: 25,
     bas: 15
   },
   {
-    _id: 3,
     ville: "Namur",
     haut: 26,
     bas: 15
   },
   {
-    _id: 4,
     ville: "Charleroi",
     haut: 25,
     bas: 12
   },
   {
-    _id: 5,
     ville: "Bruges",
     haut: 28,
     bas: 16
